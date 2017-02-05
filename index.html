@@ -190,6 +190,11 @@
       var cleanEmail = obfusicatedEmail.replace(/\W*\[dot\]\W*/g, '.').replace(/\W*\[at\]\W*/g, '@');
       $('.email-address').text(cleanEmail);
       $('.email-address').attr('href', 'mailto:' + cleanEmail);
+
+      lightbox.option({
+        'alwaysShowNavOnTouchDevices': true,
+        'wrapAround': true
+      })
     </script>
   </body>
 </html>

@@ -121,6 +121,12 @@
         }
       }
 
+      /**
+       * Refreshes masonry in a way that handles the possibility of us being below the "minimum" size.
+       * Particularly, if the viewport is smaller than is needed to actually display the image, we
+       * resize the images to fit the viewport. We also have to ensure that the height of the images
+       * matches the width (hence, thumbnails must be square).
+       */
       function refreshMasonry() {
         var width = imageWidth;
 
@@ -135,7 +141,7 @@
           $(value).css('height', width);
         });
         $('.grid-item img').each(function(index, value) {
-          $(value).css('height', width);
+          $(value).css('height', $(value).css('width'));
         });
 
         // Ensures changes are detected
@@ -151,6 +157,8 @@
         fitWidth: true
       });
       refreshMasonry();
+
+      $(window).resize(refreshMasonry);
 
       // Add event handlers to the filter buttons
       $('.filter-button').click(function() {
@@ -176,8 +184,6 @@
         $('.filter-button.active').removeClass('active');
         $('.filter-button[data-category=' + category + ']').addClass('active');
       });
-
-      $(window).resize(refreshMasonry);
 
       // Anti-spam email features
       var obfusicatedEmail = $('.email-address').text();

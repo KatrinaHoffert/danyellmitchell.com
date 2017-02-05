@@ -22,6 +22,19 @@
       <div class="grid">
       </div>
     </div>
+
+    <h1>Contact</h1>
+    <div class="contact-area">
+      <a class="email-address">danyellmitchell27 [at] gmail [dot] com</a>
+      <p class="site-icons">
+        <a href="http://dotta.deviantart.com/gallery/"><i class="fa fa-deviantart fa-2x"></i></a>
+        <a href="https://www.instagram.com/dotta18/"><i class="fa fa-instagram fa-2x"></i></a>
+        <a href="https://www.linkedin.com/in/danyell-mitchell-01482264"><i class="fa fa-linkedin fa-2x"></i></a>
+        <a href="https://www.youtube.com/channel/UCy7EXyeoe4mkkquyjfW7DCw"><i class="fa fa-youtube-play fa-2x"></i></a>
+        <a href="https://twitter.com/dotta18"><i class="fa fa-twitter fa-2x"></i></a>
+      </p>
+    </div>
+
     <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/4.1.1/masonry.pkgd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.9.0/js/lightbox.min.js"></script>
@@ -139,6 +152,12 @@
         $('.filter-button.active').removeClass('active');
         $('.filter-button[data-category=' + category + ']').addClass('active');
       });
+
+      // Anti-spam email features
+      var obfusicatedEmail = $('.email-address').text();
+      var cleanEmail = obfusicatedEmail.replace(/\W*\[dot\]\W*/g, '.').replace(/\W*\[at\]\W*/g, '@');
+      $('.email-address').text(cleanEmail);
+      $('.email-address').attr('href', 'mailto:' + cleanEmail);
     </script>
   </body>
 </html>

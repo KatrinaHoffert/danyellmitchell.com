@@ -13,11 +13,11 @@
     <div class="content-area">
       <img src="images/logo.png" width="100" />
       <div class="filter-area">
-        <button class="active">All</button>
-        <button>Ads</button>
-        <button>Identity</button>
-        <button>Illustrations</button>
-        <button>Print</button>
+        <button class="active filter-button" data-category='all'>All</button>
+        <button class="filter-button" data-category='ads'>Ads</button>
+        <button class="filter-button" data-category='identity'>Identity</button>
+        <button class="filter-button" data-category='illustrations'>Illustrations</button>
+        <button class="filter-button" data-category='print'>Print</button>
       </div>
       <div class="grid">
       </div>
@@ -88,11 +88,13 @@
         },
       ];
 
+      // Construct the grid of images and their lightboxes
       for(var i = 0; i < images.length; ++i) {
         // Create the thumbnail in its grid item
         var thumbnailPath = images[i].thumbnail;
         var firstImagePath = images[i].collection[0];
-        var gridItem = '<div class="grid-item">' +
+        var category = images[i].category;
+        var gridItem = '<div class="grid-item" data-category=' + category + '>' +
             '<a href="' + firstImagePath + '" data-lightbox="image-' + i + '">' +
             '<img src="' + thumbnailPath + '" />' +
             '</a>' +
@@ -106,10 +108,32 @@
         }
       }
 
+      // Initiate the grid
       $('.grid').masonry({
         itemSelector: '.grid-item',
         columnWidth: imageWidth,
         fitWidth: true
+      });
+
+      // Add event handlers to the filter buttons
+      $('.filter-button').click(function() {
+        var category = this.dataset.category;
+
+        // Hide everything that isn't in the category of the button that got pressed and show everything
+        // in that category
+        if(category === 'all') {
+          $('.grid-item').show('fast', function() {
+            $('.grid').masonry();
+          });
+        }
+        else {
+          $('.grid-item[data-category=' + category + ']').show('fast', function() {
+            $('.grid').masonry();
+          });
+          $('.grid-item[data-category!=' + category + ']').hide('fast', function() {
+            $('.grid').masonry();
+          });
+        }
       });
     </script>
   </body>

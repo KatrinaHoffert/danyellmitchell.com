@@ -121,12 +121,36 @@
         }
       }
 
+      function refreshMasonry() {
+        var width = imageWidth;
+
+        // Special sizing for the window being smaller than the image and its padding
+        if($(window).width() < imageWidth + 10) {
+          $('.grid').css('width', '100%');
+        }
+
+        // Set the heights to the widths
+        $('.grid-item').each(function(index, value) {
+          width = $(value).css('width');
+          $(value).css('height', width);
+        });
+        $('.grid-item img').each(function(index, value) {
+          $(value).css('height', width);
+        });
+
+        // Ensures changes are detected
+        $('.grid').masonry({
+          columnWidth: parseInt(width),
+        });
+      }
+
       // Initiate the grid
       $('.grid').masonry({
         itemSelector: '.grid-item',
         columnWidth: imageWidth,
         fitWidth: true
       });
+      refreshMasonry();
 
       // Add event handlers to the filter buttons
       $('.filter-button').click(function() {
@@ -136,15 +160,15 @@
         // in that category. Refresh the grid after show/hide.
         if(category === 'all') {
           $('.grid-item').show('fast', function() {
-            $('.grid').masonry();
+            refreshMasonry();
           });
         }
         else {
           $('.grid-item[data-category=' + category + ']').show('fast', function() {
-            $('.grid').masonry();
+            refreshMasonry();
           });
           $('.grid-item[data-category!=' + category + ']').hide('fast', function() {
-            $('.grid').masonry();
+            refreshMasonry();
           });
         }
 
@@ -152,6 +176,8 @@
         $('.filter-button.active').removeClass('active');
         $('.filter-button[data-category=' + category + ']').addClass('active');
       });
+
+      $(window).resize(refreshMasonry);
 
       // Anti-spam email features
       var obfusicatedEmail = $('.email-address').text();

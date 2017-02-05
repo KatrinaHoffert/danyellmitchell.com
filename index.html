@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Danyell Mitchell Design</title>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css" rel="stylesheet" />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.9.0/css/lightbox.min.css" rel="stylesheet" />
+    <link href="style.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="content-area">
+      <img src="images/logo.png" width="100" />
+      <div class="filter-area">
+        <button class="active">All</button>
+        <button>Ads</button>
+        <button>Identity</button>
+        <button>Illustrations</button>
+        <button>Print</button>
+      </div>
+      <div class="grid">
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/4.1.1/masonry.pkgd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.9.0/js/lightbox.min.js"></script>
+    <script>
+      // If you change this, update .grid-item and .grid-item img in the CSS
+      var imageWidth = 400;
+
+      var images = [
+        {
+          thumbnail: 'images/bear-thumb.jpg',
+          collection: [
+            'images/bear-1.jpg',
+            'images/bear-2.jpg',
+            'images/bear-3.jpg',
+            'images/bear-4.jpg',
+            'images/bear-5.jpg'
+          ],
+          category: 'illustrations'
+        },
+        {
+          thumbnail: 'images/comb-thumb.jpg',
+          collection: [
+            'images/comb-1.jpg',
+            'images/comb-2.jpg',
+            'images/comb-3.jpg'
+          ],
+          category: 'print'
+        },
+        {
+          thumbnail: 'images/drei-thumb.jpg',
+          collection: [
+            'images/drei-1.jpg',
+            'images/drei-2.jpg',
+            'images/drei-3.jpg',
+            'images/drei-4.jpg'
+          ],
+          category: 'identity'
+        },
+        {
+          thumbnail: 'images/hard-and-scrambled-thumb.jpg',
+          collection: [
+            'images/hard-and-scrambled-1.jpg',
+            'images/hard-and-scrambled-2.jpg'
+          ],
+          category: 'ads'
+        },
+        {
+          thumbnail: 'images/fungus-thumb.jpg',
+          collection: [
+            'images/fungus-1.jpg',
+            'images/fungus-2.jpg',
+            'images/fungus-3.jpg'
+          ],
+          category: 'ads'
+        },
+        {
+          thumbnail: 'images/neglect-thumb.jpg',
+          collection: [
+            'images/neglect-1.jpg',
+            'images/neglect-2.jpg',
+            'images/neglect-3.jpg'
+          ],
+          category: 'ads'
+        },
+      ];
+
+      for(var i = 0; i < images.length; ++i) {
+        // Create the thumbnail in its grid item
+        var thumbnailPath = images[i].thumbnail;
+        var firstImagePath = images[i].collection[0];
+        var gridItem = '<div class="grid-item">' +
+            '<a href="' + firstImagePath + '" data-lightbox="image-' + i + '">' +
+            '<img src="' + thumbnailPath + '" />' +
+            '</a>' +
+            '</div>';
+        $('.grid').append(gridItem);
+
+        // Now add the rest of the image for the lightbox to find
+        for(var j = 1; j < images[i].collection.length; ++j) {
+          var imagePath = images[i].collection[j];
+          $('body').append('<a href="' + imagePath + '" data-lightbox="image-' + i + '"></a>')
+        }
+      }
+
+      $('.grid').masonry({
+        itemSelector: '.grid-item',
+        columnWidth: imageWidth,
+        fitWidth: true
+      });
+    </script>
+  </body>
+</html>

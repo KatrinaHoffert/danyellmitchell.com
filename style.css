@@ -1,0 +1,45 @@
+body {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14pt;
+  color: #333;
+}
+
+.content-area {
+  max-width: 1200px;
+  margin: 3em auto;
+}
+
+.filter-area {
+  margin-top: 3em;
+  margin-bottom: 1em;
+  text-align: center;
+}
+
+.filter-area button, .filter-area button:focus, .filter-area button:active {
+  background: none;
+  border: none;
+  outline: none;
+  padding: 0;
+  font-size: 80%;
+  margin: 0 0.75em;
+  color: #555;
+  font-variant: small-caps;
+  cursor: pointer;
+}
+
+.filter-area button.active {
+  border-bottom: 2px solid #555;
+}
+
+.grid {
+  margin: 0 auto;
+}
+
+.grid-item, .grid-item img {
+  width: 400px;
+  height: 400px;
+}
+
+@media only screen and (max-device-width: 600px) {
+
+}

@@ -120,7 +120,7 @@
         var category = this.dataset.category;
 
         // Hide everything that isn't in the category of the button that got pressed and show everything
-        // in that category
+        // in that category. Refresh the grid after show/hide.
         if(category === 'all') {
           $('.grid-item').show('fast', function() {
             $('.grid').masonry();
@@ -134,6 +134,10 @@
             $('.grid').masonry();
           });
         }
+
+        // Set the appropriate button as active
+        $('.filter-button.active').removeClass('active');
+        $('.filter-button[data-category=' + category + ']').addClass('active');
       });
     </script>
   </body>

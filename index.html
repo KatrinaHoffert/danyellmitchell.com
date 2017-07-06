@@ -168,8 +168,14 @@
         }
         else {
           var firstImagePath = images[i].collection[0];
-          var gridItem = '<div class="grid-item" data-category=' + category + '>' +
-              '<a href="' + firstImagePath + '" data-lightbox="image-' + i + '">' +
+          var gridItem = '<div class="grid-item" data-category=' + category + '>';
+
+              var imageCount = images[i].collection.length;
+              if(imageCount > 1) {
+                gridItem += '<span class="image-count-overlay">(' + imageCount + ' images)</span>';
+              }
+
+              gridItem += '<a href="' + firstImagePath + '" data-lightbox="image-' + i + '">' +
               '<img src="' + thumbnailPath + '" />' +
               '</a>' +
               '</div>';

@@ -8,11 +8,6 @@
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.9.0/css/lightbox.min.css" rel="stylesheet" />
     <link href="style.css" rel="stylesheet" />
-    <link href="images/logo.png" rel="icon" />
-    <meta property="og:title" content="Danyell Mitchell Design" />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="http://danyellmitchell.com/" />
-    <meta property="og:image" content="http://danyellmitchell.com/images/logo.png" />
   </head>
   <body>
     <div class="content-area">
@@ -22,14 +17,16 @@
         <button class="filter-button" data-category='ads'>Ads</button>
         <button class="filter-button" data-category='identity'>Identity</button>
         <button class="filter-button" data-category='illustrations'>Illustrations</button>
-        <button class="filter-button" data-category='print'>Print</button>
+        <button class="filter-button" data-category='comics'>Comics</button>
       </div>
       <div class="grid">
       </div>
     </div>
 
     <h1>Contact</h1>
+    
     <div class="contact-area">
+    <p><i>Currently accepting commission requests.</i></p>
       <a class="email-address">danyellmitchell27 [at] gmail [dot] com</a>
       <p class="site-icons">
         <a href="http://dotta.deviantart.com/gallery/"><i class="fa fa-deviantart fa-2x"></i></a>
@@ -47,26 +44,77 @@
       // If you change this, update .grid-item and .grid-item img in the CSS
       var imageWidth = 400;
 
+      // NOTE: Order in this list matters! It will be the sorting order of the thumbnails
       var images = [
         {
           thumbnail: 'images/bear-thumb.jpg',
           collection: [
-            'images/bear-1.jpg',
-            'images/bear-2.jpg',
-            'images/bear-3.jpg',
-            'images/bear-4.jpg',
-            'images/bear-5.jpg'
+            'images/bear-1.jpg'
           ],
           category: 'illustrations'
         },
         {
-          thumbnail: 'images/comb-thumb.jpg',
+          thumbnail: 'images/hard-and-scrambled-thumb.jpg',
           collection: [
-            'images/comb-1.jpg',
-            'images/comb-2.jpg',
-            'images/comb-3.jpg'
+            'images/hard-and-scrambled-1.jpg',
+            'images/hard-and-scrambled-2.png'
           ],
-          category: 'print'
+          category: 'identity'
+        },
+        {
+          thumbnail: 'images/ups-thumb.jpg',
+          collection: [
+            'images/ups-1.jpg'
+          ],
+          category: 'ads'
+        },
+        {
+          thumbnail: 'images/whackamolethumb.jpg',
+          collection: [
+            'images/whackamole-1.jpg',
+            'images/whackamole-2.jpg',
+            'images/molestillcombo.jpg',
+            'images/molegiffyshadow.gif'
+          ],
+          category: 'identity'
+        },
+        {
+          thumbnail: 'images/thumbnail.jpg',
+          url: 'https://tapas.io/series/Focal-Points',
+          category: 'comics'
+        },
+        {
+          thumbnail: 'images/Tittle.jpg',
+          url: 'https://tapas.io/series/Jessa-and-Nora',
+          category: 'comics'
+        },
+        {
+          thumbnail: 'images/bear-2.jpg',
+          collection: [
+            'images/bear-2.jpg'
+          ],
+          category: 'illustrations'
+        },
+        {
+          thumbnail: 'images/bear-3.jpg',
+          collection: [
+            'images/bear-3.jpg'
+            ],
+          category: 'illustrations'
+        },
+        {
+          thumbnail: 'images/bear-thumb-4.jpg',
+          collection: [
+            'images/bear-4.jpg'
+            ],
+          category: 'illustrations'
+        },
+        {
+          thumbnail: 'images/bear-5.jpg',
+          collection: [
+           'images/bear-5.jpg'
+          ],
+          category: 'illustrations'
         },
         {
           thumbnail: 'images/drei-thumb.jpg',
@@ -79,29 +127,25 @@
           category: 'identity'
         },
         {
-          thumbnail: 'images/hard-and-scrambled-thumb.jpg',
-          collection: [
-            'images/hard-and-scrambled-1.jpg',
-            'images/hard-and-scrambled-2.jpg'
-          ],
-          category: 'ads'
-        },
-        {
           thumbnail: 'images/fungus-thumb.jpg',
           collection: [
             'images/fungus-1.jpg',
-            'images/fungus-2.jpg',
-            'images/fungus-3.jpg'
           ],
-          category: 'ads'
+          category: 'ads',
         },
         {
           thumbnail: 'images/neglect-thumb.jpg',
           collection: [
             'images/neglect-1.jpg',
-            'images/neglect-2.jpg',
-            'images/neglect-3.jpg'
+            'images/neglect-2.jpg'
           ],
+          category: 'ads'
+        },
+        {
+          thumbnail: 'images/jumping-biker-thumb.jpg',
+          collection: [
+            'images/jumping-biker.jpg'
+         ],
           category: 'ads'
         },
       ];
@@ -110,19 +154,32 @@
       for(var i = 0; i < images.length; ++i) {
         // Create the thumbnail in its grid item
         var thumbnailPath = images[i].thumbnail;
-        var firstImagePath = images[i].collection[0];
         var category = images[i].category;
-        var gridItem = '<div class="grid-item" data-category=' + category + '>' +
-            '<a href="' + firstImagePath + '" data-lightbox="image-' + i + '">' +
-            '<img src="' + thumbnailPath + '" />' +
-            '</a>' +
-            '</div>';
-        $('.grid').append(gridItem);
 
-        // Now add the rest of the image for the lightbox to find
-        for(var j = 1; j < images[i].collection.length; ++j) {
-          var imagePath = images[i].collection[j];
-          $('body').append('<a href="' + imagePath + '" data-lightbox="image-' + i + '"></a>')
+        // If there's a url, we link to it instead of a lightbox
+        if(images[i].url) {
+          var url = images[i].url;
+          var gridItem = '<div class="grid-item" data-category=' + category + '>' +
+              '<a href="' + url + '" target="_BLANK">' +
+              '<img src="' + thumbnailPath + '" />' +
+              '</a>' +
+              '</div>';
+          $('.grid').append(gridItem);
+        }
+        else {
+          var firstImagePath = images[i].collection[0];
+          var gridItem = '<div class="grid-item" data-category=' + category + '>' +
+              '<a href="' + firstImagePath + '" data-lightbox="image-' + i + '">' +
+              '<img src="' + thumbnailPath + '" />' +
+              '</a>' +
+              '</div>';
+          $('.grid').append(gridItem);
+
+          // Now add the rest of the image for the lightbox to find
+          for(var j = 1; j < images[i].collection.length; ++j) {
+            var imagePath = images[i].collection[j];
+            $('body').append('<a href="' + imagePath + '" data-lightbox="image-' + i + '"></a>')
+          }
         }
       }
 

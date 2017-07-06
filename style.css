@@ -67,6 +67,10 @@ a {
   color: #eee;
 }
 
+.lb-nav a.lb-next, .lb-nav a.lb-prev {
+  opacity: 0.25;
+}
+
 .image-count-overlay {
   position: absolute;
   bottom: 0.5em;
